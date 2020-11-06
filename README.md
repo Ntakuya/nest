@@ -6,6 +6,9 @@
 2. Nx で nestjs のアプリケーションを作成する
 3. nestjs のアプリケーションのサーバを起動する
 4. CLI について
+5. MySql などのデータベースと接続
+6. Entity の作成と読み込み
+7. エラー対応
 
 ## 1. Nx で nestjs のワークスペースを作成
 
@@ -106,8 +109,12 @@ $ nx serve nestjs-sample
 
 ## 4. CLI について
 
-schematics が個人的にまだ発見できていない感じです。
-[Nx Docs](https://nx.dev/angular/plugins/next/overview)では lib などで生成しているのですが(多分 micro service を作成するイメージなのかな？)、個人的にはまだ one application n modules の作成をしたいため、下記のようなないようでとりあえずエスケープしています。(angular を利用すれば ng command でうまく行きそうな感じしてますが、とりあえず nest だけなら)
+以下のコマンドのオプションが確認できます。
+また、アップデート結構変わっているので注意してください。
+
+```
+nx g @nrwl:nest --help
+```
 
 _module の作成_
 
@@ -166,3 +173,7 @@ $ tree -L 1 -I node_modules
 ├── workspace.json
 └── yarn.lock
 ```
+
+## 5. MySql データベースと接続
+
+## 6. Entity の作成
