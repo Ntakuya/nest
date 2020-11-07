@@ -106,8 +106,12 @@ $ nx serve nestjs-sample
 
 ## 4. CLI について
 
-schematics が個人的にまだ発見できていない感じです。
-[Nx Docs](https://nx.dev/angular/plugins/next/overview)では lib などで生成しているのですが(多分 micro service を作成するイメージなのかな？)、個人的にはまだ one application n modules の作成をしたいため、下記のようなないようでとりあえずエスケープしています。(angular を利用すれば ng command でうまく行きそうな感じしてますが、とりあえず nest だけなら)
+以下のコマンドのオプションが確認できます。
+また、アップデート結構変わっているので注意してください。
+
+```
+nx g @nrwl:nest --help
+```
 
 _module の作成_
 
