@@ -6,9 +6,6 @@
 2. Nx で nestjs のアプリケーションを作成する
 3. nestjs のアプリケーションのサーバを起動する
 4. CLI について
-5. MySql などのデータベースと接続
-6. Entity の作成と読み込み
-7. エラー対応
 
 ## 1. Nx で nestjs のワークスペースを作成
 
@@ -173,7 +170,3 @@ $ tree -L 1 -I node_modules
 ├── workspace.json
 └── yarn.lock
 ```
-
-## 5. MySql データベースと接続
-
-## 6. Entity の作成

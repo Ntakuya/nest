@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UserEntity } from '../../user/entities/user.entity';
 
 @Entity({
     name: 'todoes'
@@ -33,4 +34,7 @@ export class TodoEntity {
         name: 'created_at'
     })
     readonly createdAt: Date
+
+    @ManyToOne(type => UserEntity, user => user.todos)
+    user: UserEntity
 }
