@@ -1,3 +1,4 @@
+
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { UserEntity } from '../../user/entities/user.entity';
 import { UserStatus } from '../models/user-status';

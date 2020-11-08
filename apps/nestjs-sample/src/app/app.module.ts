@@ -6,6 +6,8 @@ import { TodoModule } from './todo/todo.module';
 import { UserModule } from './user/user.module';
 import { ProjectModule } from './project/project.module';
 import { AuthModule } from './auth/auth.module';
+import { MetadataArgsStorage } from 'typeorm/metadata-args/MetadataArgsStorage';
+import { getMetadataArgsStorage } from 'typeorm';
 
 @Module({
   imports: [
@@ -16,7 +18,7 @@ import { AuthModule } from './auth/auth.module';
       username: "nestjs-sample-db",
       password: "password",
       database: "nestjs-sample-db",
-      entities: [],
+      entities: getMetadataArgsStorage().tables.map(t => t.name),
       synchronize: true,
       autoLoadEntities: true
     }),

@@ -4,6 +4,7 @@
     "outDir": "../../dist/out-tsc",
     "types": ["node"],
     "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
     "module": "commonjs",
     "target": "es2017",
   },
