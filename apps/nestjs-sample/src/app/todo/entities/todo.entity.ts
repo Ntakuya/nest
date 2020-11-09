@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ProjectEntity } from '../../project/entities/project.entity';
 import { UserEntity } from '../../user/entities/user.entity';
 
 @Entity({
@@ -24,6 +25,9 @@ export class TodoEntity {
         name: 'is_complete'
     })
     isComplete: boolean
+
+    @OneToMany(() => ProjectEntity, project => project.todoes)
+    project: ProjectEntity
 
     @UpdateDateColumn({
         name: 'updated_at'
