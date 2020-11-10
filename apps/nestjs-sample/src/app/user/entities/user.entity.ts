@@ -1,4 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { AuthEntity } from '../../auth/entities/auth.entity';
 import { TodoEntity } from '../../todo/entities/todo.entity';
 
 @Entity({
@@ -20,6 +21,9 @@ export class UserEntity {
     })
     displayName: string
 
-    @OneToMany(type => TodoEntity, todo => todo.user)
-    todos: TodoEntity[]
+    @OneToOne<AuthEntity>(type => AuthEntity, auth => auth.user)
+    auth: AuthEntity
+
+    @OneToMany<TodoEntity>(type => TodoEntity, todo => todo.user)
+    todoes: TodoEntity[]
 }

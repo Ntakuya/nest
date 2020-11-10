@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { UserEntity } from '../../user/entities/user.entity';
 import { UserStatus } from '../models/user-status';
 
 @Entity({
@@ -9,7 +10,8 @@ export class AuthEntity {
     id: number
 
     @Column({
-        nullable: false
+        nullable: false,
+        // unique: true
     })
     email: string
 
@@ -19,7 +21,8 @@ export class AuthEntity {
     password: string
 
     @Column({
-        name: 'signup_token'
+        name: 'signup_token',
+        nullable: true
     })
     signupToken: string
 
@@ -30,6 +33,12 @@ export class AuthEntity {
         default: UserStatus.pending
     })
     status: UserStatus
+
+    @OneToOne(() => UserEntity, user => user.auth, {
+        nullable: true
+    })
+    @JoinColumn({name: 'user_id'})
+    user: UserEntity
 
     @CreateDateColumn({
         name: 'created_at'

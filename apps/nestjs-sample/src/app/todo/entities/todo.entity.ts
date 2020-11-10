@@ -29,6 +29,9 @@ export class TodoEntity {
     @OneToMany(() => ProjectEntity, project => project.todoes)
     project: ProjectEntity
 
+    @ManyToOne(type => UserEntity, user => user.todoes)
+    user: UserEntity
+
     @UpdateDateColumn({
         name: 'updated_at'
     })
@@ -38,7 +41,4 @@ export class TodoEntity {
         name: 'created_at'
     })
     readonly createdAt: Date
-
-    @ManyToOne(type => UserEntity, user => user.todos)
-    user: UserEntity
 }
