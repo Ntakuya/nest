@@ -23,9 +23,10 @@ export class AuthEntity {
 
     @Column({
         name: 'signup_token',
-        nullable: true
+        nullable: true,
+        unique: true
     })
-    signupToken: string
+    signupToken: string | null
 
     @Column({
         nullable: false,

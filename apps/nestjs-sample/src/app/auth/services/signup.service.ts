@@ -6,6 +6,7 @@ import { Connection, Repository } from 'typeorm';
 import { UserEntity } from '../../user/entities/user.entity';
 import { SignupDto } from '../dtoes/signup.dto';
 import { AuthEntity } from '../entities/auth.entity';
+import { randomBytes } from 'crypto'
 
 @Injectable()
 export class SignupService {
@@ -19,13 +20,17 @@ export class SignupService {
         } = dto
         return this.transactionOperator$().pipe(
             exhaustMap(queryRunner => {
-                return from(queryRunner.manager.save<AuthEntity>(this.authRepository.create({email, password}))).pipe(
+                return from(queryRunner.manager.save<AuthEntity>(this.buildAuthEntity({email, password}))).pipe(
                     exhaustMap(auth =>
-                        from(queryRunner.manager.save<UserEntity>(this.userRepository.create({userName, displayName, auth})))
+                        from(queryRunner.manager.save<UserEntity>(this.buildUserEntity({userName, displayName, auth}))).pipe(
+                            catchError(error => {
+                                return throwError(error)
+                            })
+                        ),
                     ),
-                    exhaustMap(sample => {
+                    exhaustMap(user => {
                         return from(queryRunner.commitTransaction()).pipe(
-                            map(() => sample)
+                            map(() => user)
                         )
                     })
                 )
@@ -44,6 +49,18 @@ export class SignupService {
             )}),
             finalize(() => {})
         )
+    }
+
+    private  buildAuthEntity(authEntity: Partial<AuthEntity>) {
+        const signupToken = randomBytes(22).toString('base64').substring(0, 22)
+        return this.authRepository.create({
+            ...authEntity,
+            signupToken,
+        })
+    }
+
+    private buildUserEntity(userEntity: Partial<UserEntity>) {
+        return this.userRepository.create(userEntity)
     }
 
     constructor(

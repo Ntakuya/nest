@@ -1,5 +1,4 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { catchError } from 'rxjs/operators';
 import { SignupDto } from '../dtoes/signup.dto';
 import { SignupService } from '../services/signup.service';
 
